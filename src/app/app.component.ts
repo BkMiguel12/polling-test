@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PollingService } from './services/polling.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'polling-test';
+  public listenData$: Observable<any>;
+
+  constructor(private pollingService: PollingService) {
+    this.listenData$ = this.pollingService.getData();
+  }
+
+  ngOnInit(): void {}
 }
